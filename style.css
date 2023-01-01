@@ -171,7 +171,7 @@ i {
   border-radius: 50%;
 }
 
-.bottom-controls .uil-play {
+.bottom-controls .play {
   border: 3px solid #52b9cd, #2d718f;
   background: linear-gradient(135deg, #52b9cd, #2d718f);
   box-shadow: 10px 10px 12px #edf1f4, -10px -10px 12px #edf1f4,
