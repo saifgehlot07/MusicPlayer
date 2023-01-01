@@ -6,6 +6,9 @@ const musicImg = document.querySelector(".music-img");
 const musicName = document.querySelector(".music-name");
 const musicArtist = document.querySelector(".artist-name");
 const musicAudio = document.querySelector(".audio");
+const prevBtn = document.querySelector(".prev");
+const playPauseBtn = document.querySelector(".play-pause");
+const nextBtn = document.querySelector(".next");
 
 // All Music Data
 const allMusic = [
