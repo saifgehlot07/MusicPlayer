@@ -1,7 +1,4 @@
-"use strict";
-
 // Selection
-const playNow = document.querySelector(".play-now");
 const musicImg = document.querySelector(".img");
 const musicName = document.querySelector(".music-name");
 const musicArtist = document.querySelector(".artist-name");
@@ -39,39 +36,46 @@ let currentMusic = 0;
 const playMusic = function () {
   isPlaying = true;
   playPauseBtn.classList.replace("uil-play", "uil-pause");
-  musicAudio.play();
   musicImg.classList.add("rotate");
+  musicAudio.play();
 };
 
 const pauseMusic = function () {
   isPlaying = false;
   playPauseBtn.classList.replace("uil-pause", "uil-play");
-  musicAudio.pause();
   musicImg.classList.remove("rotate");
+  musicAudio.pause();
 };
-
-playPauseBtn.addEventListener("click", function () {
-  isPlaying ? pauseMusic() : playMusic();
-});
 
 const loadMusic = (song) => {
   musicName.textContent = song.musicName;
   musicArtist.textContent = song.musicArtist;
   musicImg.src = `./images/${song.musicImage}.png`;
-  audioSource.src = `./music/${song.src}.mp3`;
-  console.log(audioSource);
+  musicAudio.src = `./music/${song.src}.mp3`;
 };
 
 loadMusic(allMusic[currentMusic]);
 
 const nextMusic = () => {
-  currentMusic++;
+  if (currentMusic === allMusic.length - 1) {
+    currentMusic = 0;
+  } else {
+    currentMusic++;
+  }
   loadMusic(allMusic[currentMusic]);
 };
 const prevMusic = () => {
-  currentMusic--;
+  if (currentMusic === 0) {
+    currentMusic = 2;
+  } else {
+    currentMusic--;
+  }
   loadMusic(allMusic[currentMusic]);
 };
 
 nextBtn.addEventListener("click", nextMusic);
 prevBtn.addEventListener("click", prevMusic);
+
+playPauseBtn.addEventListener("click", function () {
+  isPlaying ? pauseMusic() : playMusic();
+});
