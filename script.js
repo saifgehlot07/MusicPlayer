@@ -2,10 +2,11 @@
 
 // Selection
 const playNow = document.querySelector(".play-now");
-const musicImg = document.querySelector(".music-img");
+const musicImg = document.querySelector(".img");
 const musicName = document.querySelector(".music-name");
 const musicArtist = document.querySelector(".artist-name");
-const musicAudio = document.querySelector("audio");
+const musicAudio = document.querySelector(".audio");
+const audioSource = document.querySelector(".audio-source");
 const prevBtn = document.querySelector(".prev");
 const playPauseBtn = document.querySelector(".play");
 const nextBtn = document.querySelector(".next");
@@ -13,26 +14,27 @@ const nextBtn = document.querySelector(".next");
 // All Music Data
 const allMusic = [
   {
-    musicImage: "./images/sg-1.png",
+    musicImage: "sg-1",
     musicName: "Manike",
     musicArtist: "Jubin Nautiyal",
-    src: "./music/audio-1.mp3",
+    src: "audio-1",
   },
   {
-    musicImage: "./images/sg-2.png",
+    musicImage: "sg-2",
     musicName: "Maine Royaan",
     musicArtist: "Tanveer Evan",
-    src: "./music/audio-2.mp3",
+    src: "audio-2",
   },
   {
-    musicImage: "./images/sg-3.png",
+    musicImage: "sg-3",
     musicName: "Sugar & Brownies",
     musicArtist: "Dharia",
-    src: "./music/audio-3.mp3",
+    src: "audio-3",
   },
 ];
 
 let isPlaying = false;
+let currentMusic = 0;
 
 const playMusic = function () {
   isPlaying = true;
@@ -52,22 +54,24 @@ playPauseBtn.addEventListener("click", function () {
   isPlaying ? pauseMusic() : playMusic();
 });
 
-let musicIndex = 2;
-
-window.addEventListener("DOMContentLoaded", function () {
-  loadMusic(allMusic[musicIndex]);
-  musicAudio.play();
-});
-
-// nextBtn.addEventListener("click", nextMusic);
-// prevBtn.addEventListener("click", prevMusic);
-
-// const nextMusic = () => {};
-// const prevMusic = () => {};
-
 const loadMusic = (song) => {
   musicName.textContent = song.musicName;
   musicArtist.textContent = song.musicArtist;
-  musicImg.src = `/images/${song}.png`;
-  musicAudio.src = `/music/${song.src}.mp3`;
+  musicImg.src = `./images/${song.musicImage}.png`;
+  audioSource.src = `./music/${song.src}.mp3`;
+  console.log(audioSource);
 };
+
+loadMusic(allMusic[currentMusic]);
+
+const nextMusic = () => {
+  currentMusic++;
+  loadMusic(allMusic[currentMusic]);
+};
+const prevMusic = () => {
+  currentMusic--;
+  loadMusic(allMusic[currentMusic]);
+};
+
+nextBtn.addEventListener("click", nextMusic);
+prevBtn.addEventListener("click", prevMusic);
